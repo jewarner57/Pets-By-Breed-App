@@ -11,7 +11,7 @@ export default function App() {
         <FlatList
           data={cats}
           renderItem={({ item, index }) => {
-            return <Item title={`${index} ${item.breed}`} />
+            return <Item title={`${index} ${item.breed}`} data={item} />
           }}
           keyExtractor={item => item.breed}
         />
