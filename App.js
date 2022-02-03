@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, FlatList } from 'react-native';
 import Item from './Item'
 import { cats } from './breeds'
 
@@ -8,11 +8,13 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <SafeAreaView style={styles.breedsScroll}>
-        <ScrollView style={styles.breedsScroll}>
-          {cats.map((item, index) => {
+        <FlatList
+          data={cats}
+          renderItem={({ item, index }) => {
             return <Item title={`${index} ${item.breed}`} />
-          })}
-        </ScrollView>
+          }}
+          keyExtractor={item => item.breed}
+        />
       </SafeAreaView>
     </View>
   );
