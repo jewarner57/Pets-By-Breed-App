@@ -7,7 +7,7 @@ import SpeciesToggle from './SpeciesToggle';
 
 export default function App() {
   const species = [cats, dogs]
-  const [breedData, setBreedData] = useState(0)
+  const [breedData, setBreedData] = useState(1)
   const [filteredSpeciesData, setFilteredSpeciesData] = useState(species[breedData])
   const [query, setQuery] = useState('')
 
@@ -51,13 +51,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   breedsScroll: {
-    flex: 1,
     width: '100%',
     height: '100%',
     backgroundColor: 'cornflowerblue',
