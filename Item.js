@@ -26,7 +26,7 @@ function Item({ title, data }) {
       {properties.map((prop) => {
         return (
           prop !== 'breed' ?
-            <View style={styles.propertyContainer}>
+            <View style={styles.propertyContainer} key={title + prop}>
               <Text style={styles.propInfo}>{prop}</Text>
               <Text style={styles.propInfo}>{data[prop]}</Text>
             </View>
