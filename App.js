@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TextInput } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TextInput, KeyboardAvoidingView } from 'react-native';
 import Item from './Item'
 import { cats, dogs } from './breeds'
 import SpeciesToggle from './SpeciesToggle';
@@ -29,7 +29,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <SafeAreaView style={styles.breedsScroll}>
+      <SafeAreaView style={styles.breedsScrollContainer}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.breedsScrollContainer}
+        >
         <SpeciesToggle setSpecies={setSpecies} species={breedData} />
         <TextInput
           style={styles.searchBar}
@@ -44,6 +48,7 @@ export default function App() {
           }}
           keyExtractor={item => item.breed}
         />
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </View>
   );
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  breedsScroll: {
+  breedsScrollContainer: {
     width: '100%',
     height: '100%',
     backgroundColor: 'cornflowerblue',
