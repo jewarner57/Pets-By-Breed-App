@@ -1,54 +1,33 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TextInput, KeyboardAvoidingView } from 'react-native';
-import Item from './Item'
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { cats, dogs } from './breeds'
-import SpeciesToggle from './SpeciesToggle';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import BreedScreen from './BreedScreen';
 
 export default function App() {
   const species = [cats, dogs]
-  const [breedData, setBreedData] = useState(1)
-  const [filteredSpeciesData, setFilteredSpeciesData] = useState(species[breedData])
-  const [query, setQuery] = useState('')
-
-  const setSpecies = (index) => {
-    setBreedData(index)
-    setFilteredSpeciesData(species[index])
-    setQuery("")
-  }
-
-  const updateQuery = (searchText) => {
-    setFilteredSpeciesData(
-      species[breedData].filter((breed) => {
-        return breed.breed.toLowerCase().includes(searchText.toLowerCase())
-      })
-    )
-    setQuery(searchText)
-  }
+  const Stack = createStackNavigator();
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <SafeAreaView style={styles.breedsScrollContainer}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.breedsScrollContainer}
-        >
-        <SpeciesToggle setSpecies={setSpecies} species={breedData} />
-        <TextInput
-          style={styles.searchBar}
-          onChangeText={updateQuery}
-          value={query}
-          placeholder='Search Breeds...'
-        />
-        <FlatList
-          data={filteredSpeciesData}
-          renderItem={({ item, index }) => {
-            return <Item title={`${item.breed}`} data={item} />
-          }}
-          keyExtractor={item => item.breed}
-        />
-        </KeyboardAvoidingView>
+      <SafeAreaView style={styles.container}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}
+            >
+            <Stack.Screen name="Dogs">
+              {(props) => <BreedScreen {...props} species={dogs} speciesName={'Dogs'} />}
+            </Stack.Screen>
+            <Stack.Screen name="Cats">
+              {(props) => <BreedScreen {...props} species={cats} speciesName={'Cats'} />}
+            </Stack.Screen>
+          </Stack.Navigator>
+        </NavigationContainer>
       </SafeAreaView>
     </View>
   );
@@ -56,22 +35,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  breedsScrollContainer: {
-    width: '100%',
-    height: '100%',
     backgroundColor: 'cornflowerblue',
-    borderRadius: 10,
-  },
-  searchBar: {
-    height: 45,
-    fontSize: 20,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    padding: 10,
-    backgroundColor: '#fff',
+    flex: 1,
   },
 });

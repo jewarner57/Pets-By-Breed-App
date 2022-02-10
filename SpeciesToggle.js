@@ -1,12 +1,12 @@
 import React from 'react'
 import { StyleSheet, View, Text, Button } from 'react-native'
 
-function SpeciesToggle({ setSpecies, species }) {
+function SpeciesToggle({ navigation, species }) {
 
   return (
     <View style={styles.speciesButtons}>
-      <Button onPress={() => setSpecies(1)} title="Dogs" color={species === 1 ? '#fff' : '#000'} style={styles.speciesButton}></Button>
-      <Button onPress={() => setSpecies(0)} title="Cats" color={species === 1 ? '#000' : '#fff'} style={styles.speciesButton}></Button>
+      <Button onPress={() => navigation.navigate('Dogs')} title="Dogs" color={species == 'Dogs' ? '#fff' : '#000'} style={styles.speciesButton}></Button>
+      <Button onPress={() => navigation.navigate('Cats')} title="Cats" color={species == 'Cats' ? '#fff' : '#000'} style={styles.speciesButton}></Button>
     </View >
   );
 }
@@ -14,10 +14,12 @@ function SpeciesToggle({ setSpecies, species }) {
 const styles = StyleSheet.create({
   speciesButtons: {
     flex: 0,
+    padding: 10,
     flexDirection: 'row',
+    width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
-    padding: 20,
+    backgroundColor: 'cornflowerblue',
   },
   speciesButton: {
     flex: 1,
