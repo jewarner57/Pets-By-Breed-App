@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, FlatList, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, FlatList, TextInput, Text } from 'react-native';
 import Item from './Item'
 
 export default function BreedList({ species }) {
@@ -17,16 +17,13 @@ export default function BreedList({ species }) {
 
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.breedsScrollContainer}
-      >
         <TextInput
           style={styles.searchBar}
           onChangeText={updateQuery}
           value={query}
           placeholder='Search Breeds...'
         />
+        {filteredSpeciesData.length < 1 ? <Text styles={styles.noneFound} >No Breeds Found</Text> : null}
         <FlatList
           data={filteredSpeciesData}
           renderItem={({ item, index }) => {
@@ -34,7 +31,7 @@ export default function BreedList({ species }) {
           }}
           keyExtractor={item => item.breed}
         />
-      </KeyboardAvoidingView>
+        
     </View>
   );
 }
@@ -43,8 +40,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   breedsScrollContainer: {
     backgroundColor: 'cornflowerblue',
@@ -55,4 +50,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#fff',
   },
+  noneFound: {
+    textAlign: 'center',
+  }
 });
