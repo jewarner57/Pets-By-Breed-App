@@ -5,6 +5,7 @@ import { cats, dogs } from './breeds'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import BreedScreen from './BreedScreen';
+import BreedDetail from './BreedDetail';
 
 export default function App() {
   const species = [cats, dogs]
@@ -26,6 +27,7 @@ export default function App() {
             <Stack.Screen name="Cats">
               {(props) => <BreedScreen {...props} species={cats} speciesName={'Cats'} />}
             </Stack.Screen>
+            <Stack.Screen name="BreedDetail" component={BreedDetail} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

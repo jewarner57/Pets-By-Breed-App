@@ -7,7 +7,7 @@ export default function BreedScreen({ species, speciesName, navigation}) {
   return (
     <View style={styles.container}>
       <SpeciesToggle species={speciesName} navigation={navigation}/>
-      <BreedList species={species} />
+      <BreedList species={species} navigation={navigation} />
     </View>
   );
 }

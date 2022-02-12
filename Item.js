@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 
-function Item({ title, data }) {
+function Item({ title, data, navigation }) {
   const properties = Object.keys(data)
   const propertyAverage = getBreedAverageRating(data)
 
@@ -21,32 +21,30 @@ function Item({ title, data }) {
 
   return (
     <View style={styles.breed}>
+    <TouchableOpacity onPress={() => navigation.navigate('BreedDetail', {
+      breed_name: title,
+      breed_properties: properties,
+      breed_rating: propertyAverage,
+      data: data
+    }
+    )}>
+    
       <Text style={styles.info} >{title}</Text>
       <Text style={styles.rating} >Average Rating: {isNaN(propertyAverage) ? '0' : propertyAverage.toFixed(2)}</Text>
-      {properties.map((prop) => {
-        return (
-          prop !== 'breed' ?
-            <View style={styles.propertyContainer} key={title + prop}>
-              <Text style={styles.propInfo}>{prop}</Text>
-              <Text style={styles.propInfo}>{data[prop]}</Text>
-            </View>
-            : null
-        )
-      })}
+    
+    </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   breed: {
-    flex: 1,
     backgroundColor: '#333',
-    padding: 25,
-    width: '100%',
+    padding: 60,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 2,
-    borderBottomColor: 'gray',
+    borderColor: 'gray',
   },
   info: {
     color: '#fff',

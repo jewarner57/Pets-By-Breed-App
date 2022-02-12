@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, View, FlatList, TextInput, Text } from 'react-native';
 import Item from './Item'
 
-export default function BreedList({ species }) {
+export default function BreedList({ species, navigation }) {
   const [filteredSpeciesData, setFilteredSpeciesData] = useState(species)
   const [query, setQuery] = useState('')
 
@@ -23,15 +23,14 @@ export default function BreedList({ species }) {
           value={query}
           placeholder='Search Breeds...'
         />
-        {filteredSpeciesData.length < 1 ? <Text styles={styles.noneFound} >No Breeds Found</Text> : null}
+        {filteredSpeciesData.length < 1 ? <Text styles={styles.noneFound}> No Breeds Found</Text> : null}
         <FlatList
           data={filteredSpeciesData}
           renderItem={({ item, index }) => {
-            return <Item title={`${item.breed}`} data={item} />
+            return <Item title={`${item.breed}`} data={item} navigation={navigation}/>
           }}
           keyExtractor={item => item.breed}
         />
-        
     </View>
   );
 }
