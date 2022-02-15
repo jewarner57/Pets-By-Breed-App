@@ -1,12 +1,12 @@
 import { StyleSheet, View } from 'react-native';
-import SpeciesToggle from './SpeciesToggle';
+import SpeciesLabel from './SpeciesLabel';
 import BreedList from './BreedList';
 
 export default function BreedScreen({ species, speciesName, navigation}) {
 
   return (
     <View style={styles.container}>
-      <SpeciesToggle species={speciesName} navigation={navigation}/>
+      <SpeciesLabel species={speciesName}/>
       <BreedList species={species} navigation={navigation} />
     </View>
   );

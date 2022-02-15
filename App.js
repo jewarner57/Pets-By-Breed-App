@@ -20,15 +20,16 @@ export default function App() {
               headerShown: false,
               tabBarStyle: {
                 backgroundColor: 'cornflowerblue',
-                paddingTop: 10,
-                height: 90,
+                height: 100,
+                position: 'absolute',
               },
               tabBarLabelStyle: {
                 fontSize: 20,
               },
-              fontSize: 100,
               tabBarActiveTintColor: '#fff',
               tabBarInactiveTintColor: '#000',
+              tabBarActiveBackgroundColor: '#3f7deb',
+              
             })}
           >
             <Tab.Screen name="Dogs" options={{ tabBarIcon: () => (<Text style={styles.icon}>🐕‍🦺</Text>)}}>
